@@ -16,10 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from fakegram import views
+# Local views
+from fakegram import views as local_views
+
+# Posts views
+from posts import views as posts_views
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
-    path('hello-world/', views.hello_world), 
-    path('hi/<str:name>/<int:age>/', views.hi),
+    path('hello-world/', local_views.hello_world), 
+    path('hi/<str:name>/<int:age>/', local_views.hi),
+
+    path('posts', posts_views.list_posts)
 ]
