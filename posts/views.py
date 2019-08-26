@@ -1,5 +1,5 @@
 """
-Posts views 
+Posts views
 """
 
 # Django
@@ -46,7 +46,5 @@ posts = [
 
 def list_posts(request):
 	"""List existing posts."""
-
+	# pasamos el como posts el objeto posts
 	return render(request, 'feed.html', {'posts': posts})
-
-	
