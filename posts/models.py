@@ -1,4 +1,6 @@
-"""Posts models."""
+"""Posts models.:
+   It is not usefull since we are going to use the Django auth_user model for the Fakegram app.
+"""
 
 # Django 
 from django.db import models
@@ -82,3 +84,4 @@ users = [
 		last_name = '',
 	},
 ]
+'''
