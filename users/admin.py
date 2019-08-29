@@ -1,9 +1,11 @@
 """User admin classes."""
 
 # Django
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
 
 # Models 
+from django.contrib.auth.models import User
 from users.models import Profile
 # Register your models here.
 
@@ -45,3 +47,43 @@ class ProfileAdmin(admin.ModelAdmin):
 		'user__is_active',
 		'user__is_staff',
 	)
+
+	fieldsets = (
+		('Profile', {
+			'fields': (
+				('user', 'picture'),),
+			}),
+		('Extra info', {
+			'fields': (
+				('website', 'phone_number'),
+				('biography'),),
+			}),
+		#('Metadata', {
+		#	'fields': (('created', 'modified'),),
+		#	}),
+	)
+
+	#readonly_fields = ('created', 'modified',)
+
+class ProfileInLine(admin.StackedInline):
+	"""Profile in-line admin for users."""
+
+	model = Profile
+	can_delete = False
+	verbose_name_plural = 'profiles'
+
+class UserAdmin(BaseUserAdmin):
+	"""Add profile admin to base user admin."""
+	inlines = (ProfileInLine,) # es una tupla
+	list_display = (
+		'username',
+		'email',
+		'first_name',
+		'last_name',
+		'is_active',
+		'is_staff',
+	)
+
+# tenemos que desregistrar el que ya existía y registrar el nuevo
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin) # recibe el modelo y también la clase que vamos a utilizar
