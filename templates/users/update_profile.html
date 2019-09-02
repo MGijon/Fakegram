@@ -14,7 +14,7 @@
 					{% csrf_token %}
 
 					{% if form.errors %}
-						<p> {{ form.errors }} </p>
+						<p class="alert alert-danger"> {{ form.errors }} </p>
 					{% endif %}
 
 					<div class="media">
