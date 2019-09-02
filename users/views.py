@@ -67,7 +67,7 @@ def logout_view(request):
 	logout(request)
 	return redirect('login')
 
-
+@login_required
 def update_profile(request):
 	"""Update a user's profile view."""
 	profile = request.user.profile
