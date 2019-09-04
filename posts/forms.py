@@ -1,10 +1,10 @@
 """Post forms."""
 
 # Django
-from djnago import forms
+from django import forms
 
 # Models
-from post.models import Post
+from posts.models import Posts
 
 class PostForm(forms.ModelForm):
 	"""Post model form."""
@@ -12,5 +12,5 @@ class PostForm(forms.ModelForm):
 	class Meta:
 		"""Form settins."""
 
-		model = Post 
+		model = Posts 
 		fields = ('user', 'profile', 'title', 'photo')
