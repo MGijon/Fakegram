@@ -2,21 +2,28 @@
 <nav class="navbar navbar-expand-lg fized-top" id="main-navbar">
 	<div class="container">
 		
-		<a href="" class="navbar-brand pr-5" style="border-right: 1px solid #efefef;">
+		{# Fakegram logo #}
+		<a href="{% url "feed" %}" class="navbar-brand pr-5" style="border-right: 1px solid #efefef;">
 			<img src="{% static "img/instagram.png" %}" height="45" class="d-inline-block align-top" />
 		</a>
 
 		<div class="collapse navbar-collapse">
 			<ul class="navbar-nav mr-auto">
 				
+				{# Profile image #}
 				<li class="nav-item">
 					<a href="">
-						<img src="{% static 'img/default-profile.png' %}" height="35" class="d-inline-block align-top rounded-circle" />
+						{% if request.user.profile.picture %}
+							<img src="{{ request.user.profile.picture.url }}" height="35" class="d-inline-block align-top rounded-circle" />
+						{% else %}
+							<img src="{% static 'img/default-profile.png' %}" height="35" class="d-inline-block align-top rounded-circle" />
+						{% endif %}
 					</a>
 				</li>
 			
+				{# New post #}
 				<li class="nav-item nav-icon">
-					<a href="">
+					<a href="{% url "create_post" %}">
 						<i class="fas fa-plus"></i>
 					</a>
 				</li>
