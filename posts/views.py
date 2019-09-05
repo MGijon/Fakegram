@@ -66,7 +66,7 @@ def create_post(request):
 
 	return render(
 		request=request,
-		template_name = 'posts/new.hml',
+		template_name = 'posts/new.html',
 		context={
 			'form': form, 
 			'user': request.user,
