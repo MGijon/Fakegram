@@ -18,7 +18,7 @@ def login_view(request):
 		user = authenticate(request, username=username, password=password)
 		if user:
 			login(request, user)
-			return redirect('feed') # nombre que le hemos dado a la url en urls.py, así si cambia la url sigue funcionando
+			return redirect('posts:feed') # nombre que le hemos dado a la url en urls.py, así si cambia la url sigue funcionando
 		else:
 			return render(request, 'users/login.html', {'error': 'Invalid username and password'})
 	return render(request, 'users/login.html')
@@ -31,7 +31,7 @@ def signup(request):
 		form = SignupForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('login')
+			return redirect('users:login')
 	else:
 		form = SignupForm()
 
@@ -49,7 +49,7 @@ def signup(request):
 def logout_view(request):
 	"""Logout view."""
 	logout(request)
-	return redirect('login')
+	return redirect('users:login')
 
 @login_required
 def update_profile(request):
@@ -68,7 +68,7 @@ def update_profile(request):
 			profile.picture = data['picture']
 			profile.save()
 
-			return redirect('update_profile')
+			return redirect('users:update_profile')
 	else:
 		form = ProfileForm()
 
