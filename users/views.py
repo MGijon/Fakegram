@@ -4,7 +4,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView
 
+# Models 
+from django.contrib.auth.models import User
 # Forms
 from users.forms import ProfileForm, SignupForm
 
@@ -49,7 +52,7 @@ def signup(request):
 def logout_view(request):
 	"""Logout view."""
 	logout(request)
-	return redirect('users:login')
+	return redirect('login')
 
 @login_required
 def update_profile(request):
@@ -81,3 +84,12 @@ def update_profile(request):
 			'form': form,
 		}
 	) 
+
+
+class UserDetailView(DetailView):
+	"""User detail view."""
+
+	template_name = 'users/detail.html'	
+	slug_field = 'username'
+	slug_url_kwarg = 'username' # aqiñi va el término que hemos usado para llamar al string en las urls
+	queryset = User.objects.all()
