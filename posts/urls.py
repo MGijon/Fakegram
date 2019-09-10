@@ -16,6 +16,6 @@ urlpatterns = [
     path(
     	route = 'posts/new/', 
     	view= views.create_post, 
-    	name='create'
+    	name='create_posts'
     ),
 ]

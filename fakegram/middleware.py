@@ -21,8 +21,8 @@ class PofileCompletionMiddleware:
 			if not request.user.is_staff:
 				profile = request.user.profile
 				if not profile.picture or not profile.biography:
-					if request.path not in [reverse('users:update_profile'), reverse('users:logout')]: # nos da la url a partir de su nombre
-						return redirect('users:update_profile')
+					if request.path not in [reverse('update_profile'), reverse('logout')]: # nos da la url a partir de su nombre
+						return redirect('update_profile')
 
 		response = self.get_response(request)
 		return response
