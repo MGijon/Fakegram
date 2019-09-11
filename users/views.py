@@ -8,6 +8,7 @@ from django.views.generic import DetailView
 
 # Models 
 from django.contrib.auth.models import User
+
 # Forms
 from users.forms import ProfileForm, SignupForm
 
