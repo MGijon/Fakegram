@@ -6,14 +6,11 @@ from django.urls import path
 # Views
 from users import views
 
-urlpatterns =[
 
-	# Posts
-	path(
-		route = '<str:username>/',
-		view = views.UserDetailView.as_view(),
-		name = 'detail'
-	),
+## DJANGO RESUELVE LAS URLs EN EL ORDEN QUE LAS PONGAMOS
+
+
+urlpatterns =[
 
 	# Management
 	path(
@@ -30,7 +27,7 @@ urlpatterns =[
 
     path(
     	route = 'users/signup/', 
-    	view = views.signup,
+    	view = views.SignupView.as_view(),
     	name ='signup'
     ),
 
@@ -39,4 +36,11 @@ urlpatterns =[
     	view = views.update_profile, 
     	name = 'update_profile'
 	),
+
+    # Posts
+    path(
+        route = '<str:username>/',
+        view = views.UserDetailView.as_view(),
+        name = 'detail'
+    ),
 ]

@@ -3,9 +3,6 @@ Posts views
 """
 
 # Django
-from django.shortcuts import render, redirect 
-from django.http import HttpResponse # useless now
-from django.contrib.auth.decorators import login_required  # useless new
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy
