@@ -15,7 +15,7 @@ from posts.models import Posts
 from users.models import Profile
 
 # Forms
-from users.forms import ProfileForm, SignupForm
+from users.forms import SignupForm #, ProfileForm
 
 
 
@@ -84,37 +84,37 @@ class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
 	template_name = 'users/logged_out.html'
 
 
-@login_required
-def update_profile(request):
-	"""Update a user's profile view."""
-	profile = request.user.profile
-	
-	if request.method == 'POST':
-		form = ProfileForm(request.POST, request.FILES) # post para los caracteres y files para la foto
-
-		if form.is_valid():
-			data = form.cleaned_data
-
-			profile.website = data['website']
-			profile.biography = data['biography']
-			profile.phone_number = data['phone_number']
-			profile.picture = data['picture']
-			profile.save()
-
-			url = reverse('users:detail', kwargs={'username': request.user.username})
-			return redirect(url)
-	else:
-		form = ProfileForm()
-
-	return render(
-		request=request, 
-		template_name='users/update_profile.html',
-		context={
-			'profile': profile,
-			'user': request.user,
-			'form': form,
-		}
-	) 
+#@login_required
+#def update_profile(request):
+#	"""Update a user's profile view."""
+#	profile = request.user.profile
+#	
+#	if request.method == 'POST':
+#		form = ProfileForm(request.POST, request.FILES) # post para los caracteres y files para la foto
+#
+#		if form.is_valid():
+#			data = form.cleaned_data
+#
+#			profile.website = data['website']
+#			profile.biography = data['biography']
+#			profile.phone_number = data['phone_number']
+#			profile.picture = data['picture']
+#			profile.save()
+#
+#			url = reverse('users:detail', kwargs={'username': request.user.username})
+#			return redirect(url)
+#	else:
+#		form = ProfileForm()
+#
+#	return render(
+#		request=request, 
+#		template_name='users/update_profile.html',
+#		context={
+#			'profile': profile,
+#			'user': request.user,
+#			'form': form,
+#		}
+#	) 
 
 class UpdateProfileView(LoginRequiredMixin, UpdateView):
 	"""Update profile view."""
@@ -126,8 +126,8 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
 	def get_object(self):
  		"""Return user's profile."""
  		return self.request.user.profile
-
- 	def get_success_url(self):
+	
+	def get_success_url(self):
  		"""Return to user's profile."""
  		username =  self.object.user.username
  		return reverse('users:detail', kwargs={'username': username})
